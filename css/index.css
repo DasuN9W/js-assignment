@@ -5,9 +5,8 @@ main {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-h1 {
-    color: #4CAF50;
-    text-align: center;
+h2{
+    padding: 20px;
 }
 /* Section Styling */
 section {
@@ -128,4 +127,82 @@ tfoot td {
 
 #order button:hover {
     background-color: var(--ratingstar-color);
+}
+@media (max-width: 768px) {
+    main {
+        padding: 15px;
+        max-width: 95%;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item img {
+        width: 80px;
+        height: 80px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .item p {
+        font-size: 1.2em;
+        width: auto;
+    }
+
+    .item input {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .item button {
+        width: 100%;
+        padding: 10px;
+        margin-left: 0;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    table,
+    th,
+    td {
+        font-size: 16px;
+    }
+
+    #order button {
+        width: 100%;
+        margin: 5px 0;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .item p {
+        font-size: 1em;
+    }
+
+    .item button {
+        font-size: 13px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+
+    #total-price {
+        font-size: 16px;
+    }
+
+    #order button {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
 }

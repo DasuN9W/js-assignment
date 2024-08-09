@@ -1,35 +1,35 @@
 //intialize price for each products.
 const prices = {
-    'Apple': 200,
-    'Banana': 200,
-    'Orange': 200,
-    'Grapes': 200,
-    'Mango': 200,
-    'Pineapple': 200,
-    'Carrot': 200,
-    'Beans': 200,
-    'beet-root': 200,
-    'Potato': 200,
-    'Tomato': 200,
-    'Onion': 200,
-    'milk-powder': 200,
-    'Cheese': 200,
-    'Yogurt': 200,
-    'Butter': 200,
-    'Cream': 200,
-    'Eggs': 200,
-    'Chicken': 200,
-    'Salmon': 200,
-    'Beef': 200,
-    'Shrimp': 200,
-    'Pork': 200,
-    'Lamb': 200,
-    'Flour': 200,
-    'Sugar': 200,
-    'Baking Powder': 200,
-    'salt': 200,
-    'bell-pepper': 200,
-    'chocolate-powder': 200,
+    'papaya': 160,
+    'mango': 450,
+    'mangosteen': 200,
+    'rambutan': 620,
+    'melon': 600,
+    'durian': 1000,
+    'batana': 555,
+    'bell-paper': 350,
+    'cabbage': 250,
+    'carrot': 650,
+    'sweet potato': 775,
+    'cucumber': 600,
+    'ice-cream': 700,
+    'youghurt': 900,
+    'mozzarella': 550,
+    'whipping-cream': 950,
+    'non-fat-milk': 750,
+    'faluda-milk': 800,
+    'Chicken': 1250,
+    'tuna': 1200,
+    'Beef': 2000,
+    'prawns': 3600,
+    'Pork': 2200,
+    'Lamb': 2100,
+    'Flour': 930,
+    'Sugar-cubes': 620,
+    'Baking Powder': 1070,
+    'salt': 1980,
+    'baking-soda': 860,
+    'chocolate-powder': 996,
 };
 
 //add items to the order table
@@ -41,7 +41,7 @@ function addItem(name, category) {
 
     //check quantity is greater than zero or not
     if (quantity > 0) {
-        const price = prices[name] * quantity; //calculate price for the enter quantity
+        const price = prices[name] * quantity; 
         const tableBody = document.getElementById('order-table').getElementsByTagName('tbody')[0];
         const rows = tableBody.getElementsByTagName('tr');
         let itemExists = false;
@@ -68,29 +68,29 @@ function addItem(name, category) {
             row.insertCell(3).textContent = price.toFixed(2);
             row.insertCell(4).innerHTML = '<button onclick="removeItem(this)">Remove</button>';
         }
-        updateTotalPrice(); //after upate the table count total price
+        updateTotalPrice(); 
         alert(`Added ${quantity.toFixed(1)} kg of ${name} to your order.\nThank For Choose Us...`);
     } else {
-        alert(`Please enter a quantity greater than 0 for ${name}.`);//if quantity is not greater than zero notify user to eneter quantity greater than zero
+        alert(`Please enter a quantity greater than 0 for ${name}.`);
     }
 }
 
 //remove item from orer table when click on remove button
 function removeItem(button) {
     const row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);//remove the order row
-    updateTotalPrice(); //after remove the order, count total price again 
+    row.parentNode.removeChild(row);
+    updateTotalPrice(); 
 }
 
 //update total price
 function updateTotalPrice() {
     let totalPrice = 0;
-    const rows = document.querySelectorAll('#order-table tbody tr'); //read all rows in the order table
+    const rows = document.querySelectorAll('#order-table tbody tr'); 
     rows.forEach(row => {
-        const price = parseFloat(row.children[3].textContent); //read prices from each products
-        totalPrice += price; //sum to the prices
+        const price = parseFloat(row.children[3].textContent); 
+        totalPrice += price; 
     });
-    document.getElementById('total-price').textContent = `Rs${totalPrice.toFixed(2)}`; //update total in displyed on the web page
+    document.getElementById('total-price').textContent = `Rs${totalPrice.toFixed(2)}`; 
 }
 
 //add items to favorite
@@ -98,12 +98,12 @@ function addToFavourites() {
     const rows = document.querySelectorAll('#order-table tbody tr');
     if (rows.length === 0) {
 
-        //if there not any items in order give alert message to user
+        
         alert('No items to add to favorite.\nplease choose products to add favorite...!');
         return;
     }
     
-    const favourites = JSON.parse(localStorage.getItem('favourites')) || []; //store in the local storage.
+    const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
 
     rows.forEach(row => {
 
@@ -115,22 +115,22 @@ function addToFavourites() {
             
         //check order is not in already in favorite array.
         if (!favourites.some(fav => fav.itemName === itemName)) {
-            favourites.push({ itemName, category, quantity, price }); // order is not in array add it to favorite array.
+            favourites.push({ itemName, category, quantity, price }); 
         }
     });
 
     localStorage.setItem('favourites', JSON.stringify(favourites)); //updated the favorite array into the local storage.
-    alert('Chosen products added to favourites.\nYou can apply it after you choose products.'); //give alert messsage to user to notify their order added to favorites
+    alert('Chosen products added to favourites.\nYou can apply it after you choose products.'); 
 }
 
 function applyFavourites() {
     //get the favorite array from local storage or get as empty array it is dosen't exist in local storage.
     const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
 
-    //check there are any favorite to apply 
+    
     if (favourites.length === 0) {
 
-        //if there are not any favorite give alert to user and exit the funtions
+        
         alert('No favourites to apply.\nYou can add favorite to apply favorite..');
         return;
     }
@@ -247,17 +247,17 @@ function submitOrder(event) {
     // Validate the user inputs.
     if (name && email && phone && address && town && zip && paymentType && cardName && expiryDate && cvv) {
         const deliveryDate = new Date();
-        deliveryDate.setDate(deliveryDate.getDate() + 5); // Assuming delivery takes 5 days
+        deliveryDate.setDate(deliveryDate.getDate() + 5); 
         
-        //create delivery date.
+       
         const formattedDate = deliveryDate.toLocaleDateString("en-US", {
             weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
         });
 
-        //show alert to customer included name,adress,town,zip code and delivery date.
+        
         alert(`Thank you for your purchase, ${name}! Your order will be delivered to ${address}, ${town}, ${zip} by ${formattedDate}.`);
     } else {
-        //if customer dosen't fill every input in form give alert to customer to fill all fields.
+        
         alert("Please fill in all required fields to checkout your order...!");
     }
 }
@@ -265,38 +265,37 @@ function submitOrder(event) {
 // Function to populate order details on the pay.html page
 function populateOrderDetails() {
 
-    //retrieve the order detaild from localstorage or initialize an empty array.
+   
     const orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
 
-    //get the table body elemnt order details will be appended.
+    
     const tableBody = document.querySelector('#checkout-order-table tbody');
     
-    //initialize variable for the total price.
+    
     let totalPrice = 0;
 
-    //iterate other every details.
+   
     orderDetails.forEach(detail => {
 
-        //create new row in table
         const row = document.createElement('tr');
 
-        //populate the row with customer order details
+        
         row.innerHTML = `
             <td>${detail.itemName}</td>
             <td>${detail.category}</td>
             <td>${detail.quantity}</td>
             <td>${detail.price}</td>
         `;
-        //append table row to table body
+        
         tableBody.appendChild(row);
 
-        // Extract price from the string, remove '$' and convert to number
+       
         const priceValue = parseFloat(detail.price.replace('Rs.', ''));
         
-        //add the price to the total pric
+       
         totalPrice += priceValue;
     });
 
-    //show the total price wich element have id named'total-price'
+  
     document.getElementById('total-price').textContent = `Rs ${totalPrice.toFixed(2)}`;
 }
